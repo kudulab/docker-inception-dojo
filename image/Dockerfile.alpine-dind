@@ -1,0 +1,32 @@
+FROM docker:18.09-dind
+
+ENV DOJO_VERSION=0.3.2
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+  apk add --no-cache bash shadow sudo git ncurses && \
+  git clone --depth 1 -b ${DOJO_VERSION} https://github.com/ai-traders/dojo.git /tmp/dojo_git &&\
+  /tmp/dojo_git/image_scripts/src/install.sh && \
+  addgroup dojo root && \
+  rm -r /tmp/dojo_git && \
+  echo 'dojo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+ENV DOCKER_COMPOSE_VERSION="1.23.2"
+RUN apk add --no-cache python3 &&\
+  pip3 install docker-compose==${DOCKER_COMPOSE_VERSION}
+
+RUN pip3 install virtualenv pytest==4.4.1
+
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz /tmp/
+RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
+
+ADD entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
+COPY ./services.d /etc/services.d
+COPY ./etc_dojo.d/scripts/* /etc/dojo.d/scripts/
+
+# pretty bash prompt
+COPY bashrc /home/dojo/.bashrc
+COPY profile /home/dojo/.profile
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+CMD ["/bin/bash"]
