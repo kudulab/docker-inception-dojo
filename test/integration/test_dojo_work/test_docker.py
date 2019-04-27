@@ -23,3 +23,7 @@ def test_docker_run():
 def test_docker_compose_cli():
     result = run_command('docker-compose', ['--version'])
     assert result.returncode == 0
+
+def test_virtualenv_create():
+    result = run_command('python3', ['-m', 'venv', 'my_venv'])
+    assert result.returncode == 0
