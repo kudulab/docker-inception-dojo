@@ -1,6 +1,6 @@
 # docker-inception-dojo
 
-A docker [Dojo](https://github.com/ai-traders/dojo) image to execute Dojo tests.
+A docker [Dojo](https://github.com/kudulab/dojo) image to execute Dojo tests.
 
 Built both from alpine and ubuntu18.
 

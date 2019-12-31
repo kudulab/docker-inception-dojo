@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DOJO_VERSION=0.3.2
+ENV DOJO_VERSION=0.6.3
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
   python3 python3-pip python3-virtualenv python3-venv \
