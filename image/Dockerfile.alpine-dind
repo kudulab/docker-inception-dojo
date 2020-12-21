@@ -1,6 +1,6 @@
 FROM docker:18.09-dind
 
-ENV DOJO_VERSION=0.6.3
+ENV DOJO_VERSION=0.10.3
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
   apk add --no-cache bash shadow sudo git ncurses && \
   git clone --depth 1 -b ${DOJO_VERSION} https://github.com/ai-traders/dojo.git /tmp/dojo_git &&\
@@ -22,7 +22,6 @@ ADD entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
 COPY ./services.d /etc/services.d
-COPY ./etc_dojo.d/scripts/* /etc/dojo.d/scripts/
 
 # pretty bash prompt
 COPY bashrc /home/dojo/.bashrc
