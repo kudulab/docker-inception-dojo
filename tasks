@@ -81,7 +81,7 @@ case "${command}" in
       echo "DOJO_WORK_OUTER=$(pwd)/test/integration/test_dojo_work" >> ./Dojofile.sut
       echo "DOJO_DOCKER_OPTIONS=--privileged" >> ./Dojofile.sut
       rm -rf test/integration/test_dojo_work/my_venv/
-      dojo -c ./Dojofile.sut "pytest ."
+      dojo -c ./Dojofile.sut "pytest . --verbose"
       ;;
   example)
       check_flavor $2
