@@ -1,3 +1,7 @@
+### 0.2.0 (2022-Feb-18)
+
+Use new alpine image `docker:20.10.12-dind-alpine3.15`
+
 ### 0.1.3 (2020-Dec-20)
 
 Use Dojo scripts from version 0.10.3, remove duplicated creation of `/run/user/{dojo_uid}`
