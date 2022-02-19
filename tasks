@@ -51,6 +51,21 @@ function check_flavor {
   fi
 }
 
+function setup_github_credentials {
+  if [ -z "$GITHUB_CREDENTIALS" ]; then
+    echo "Error: GITHUB_CREDENTIALS not set" >&2
+    exit 1
+  fi
+  # GITHUB_CREDENTIALS should be in format of account-name:api-key
+
+  # example SSH URL: https://github.com/user/repo.git
+  # example HTTPS URL: git@github.com:user/repo.git
+  OLD_URL=$(git remote get-url origin)
+  NEW_URL=$(echo $OLD_URL | sed "s|git@|https://$GITHUB_CREDENTIALS@|g")
+  git remote set-url origin $NEW_URL
+  echo "GitHub new remote was set"
+}
+
 command="$1"
 set +u
 case "${command}" in
@@ -101,8 +116,8 @@ case "${command}" in
       ;;
   release)
       ./tasks verify_version
-      version=$(releaser::get_last_version_from_whole_changelog "${changelog_file}")
-      git tag "${version}" && git push origin "${version}"
+      setup_github_credentials
+      releaser::git_tag_from_changelog
       ;;
   publish)
       check_flavor $2
