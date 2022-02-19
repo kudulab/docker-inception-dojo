@@ -1,3 +1,8 @@
+### 0.2.1 (2022-Feb-19)
+
+* Bump pytest to 6.1.1
+* Upgrade pip
+
 ### 0.2.0 (2022-Feb-18)
 
 Use new alpine image `docker:20.10.12-dind-alpine3.15`

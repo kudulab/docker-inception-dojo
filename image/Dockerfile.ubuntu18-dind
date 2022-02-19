@@ -11,7 +11,8 @@ RUN apt-get update && \
   rm -r /tmp/dojo_git && \
   echo 'dojo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN pip3 install pytest==4.4.1
+RUN python3 -m pip install --upgrade pip &&\
+  pip3 install pytest==6.1.1
 
 # Install Docker
 # To support docker in docker on any driver - clean up now and
