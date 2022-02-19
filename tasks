@@ -58,10 +58,10 @@ function setup_github_credentials {
   fi
   # GITHUB_CREDENTIALS should be in format of account-name:api-key
 
-  # example SSH URL: https://github.com/user/repo.git
-  # example HTTPS URL: git@github.com:user/repo.git
+  # example HTTPS URL: https://github.com/user/repo.git
+  # example SSH URL: git@github.com:user/repo.git
   OLD_URL=$(git remote get-url origin)
-  NEW_URL=$(echo $OLD_URL | sed "s|git@|https://$GITHUB_CREDENTIALS@|g")
+  NEW_URL=$(echo $OLD_URL | sed "s|git@github.com:|https://$GITHUB_CREDENTIALS@github.com/|g")
   git remote set-url origin $NEW_URL
   echo "GitHub new remote was set"
 }
