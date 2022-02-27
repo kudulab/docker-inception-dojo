@@ -4,11 +4,11 @@ workflows:
   # Environment variables required in CircleCI environment:
   #  - DOCKERHUB_USERNAME
   #  - DOCKERHUB_TOKEN
+  #  - GITHUB_CREDENTIALS
   docker-inception-dojo:
     jobs:
       - build_alpine
       - build_ubuntu
-      - verify_version
       - itest_alpine:
           requires:
             - build_alpine
@@ -19,7 +19,6 @@ workflows:
           requires:
             - itest_alpine
             - itest_ubuntu
-            - verify_version
           filters:
             branches:
               only: master
@@ -55,13 +54,6 @@ jobs:
           root: ~/repo
           paths:
             - image/*imagerc
-
-  verify_version:
-    executor: platform
-    steps:
-      - setup
-      - run:
-          command: /bin/bash -c "./tasks verify_version"
 
   itest_alpine:
     executor: platform
