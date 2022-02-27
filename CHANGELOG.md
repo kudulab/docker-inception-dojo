@@ -1,3 +1,7 @@
+### 0.3.0 (2022-Feb-28)
+
+* Make Docker daemon log to a file, and not to the console. Logging to the console makes the output cluttered, as logs from Docker daemon are incoming together with any other logs or output
+
 ### 0.2.1 (2022-Feb-19)
 
 * Bump pytest to 6.1.1

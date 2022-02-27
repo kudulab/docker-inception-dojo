@@ -32,3 +32,16 @@ def test_docker_compose_cli():
 def test_virtualenv_create():
     result = run_command('python3', ['-m', 'venv', 'my_venv'])
     assert result.returncode == 0
+
+def test_docker_logs_are_not_printed_to_console():
+    result = run_command('docker', ['run', 'hello-world'])
+    assert 'Hello from Docker!' in result.stdout
+    assert 'ERRO' not in result.stdout
+    assert 'ERRO' not in result.stderr
+    assert 'INFO' not in result.stdout
+    assert 'INFO' not in result.stderr
+    assert result.returncode == 0
+
+    # log file exists and is not empty
+    result = run_command('tail', ['/var/log/docker/current'])
+    assert 'info' in result.stdout
