@@ -10,12 +10,16 @@ Built both from alpine and ubuntu18.
 2. Provide a Dojofile:
 ```
 $ cat Dojofile
-DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu18-dind-0.1.3"
+DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu18-dind-0.3.0"
 # or if you prefer the alpine version
-# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-dind-0.1.3"
+# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-dind-0.3.0"
 DOJO_DOCKER_OPTIONS="--privileged"
 ```
-3. Enter a docker container by running `dojo` in the same directory as Dojofile.
+3. Run`dojo` in the same directory as Dojofile. It will:
+  * docker pull a Docker image
+  * start a Docker container
+  * log you into the Docker container
+
 4. Example commands to run inside the Dojo created container:
 ```
 docker ps -a
@@ -35,7 +39,7 @@ Instructions how to update this project.
 
 ## License
 
-Copyright 2019-2020 Ewa Czechowska, Tomasz Sętkowski
+Copyright 2019-2022 Ava Czechowska, Tom Setkowski
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
