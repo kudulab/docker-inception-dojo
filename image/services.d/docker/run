@@ -1,5 +1,19 @@
-#!/usr/bin/with-contenv bash
+#!/bin/sh
 
+# pidfile=/run/docker.pid
+# while [ -f $pidfile ] ; do
+#     sleep 0.5
+# done
+
+# thanks to this you can grep your logs
+# cat /var/log/docker/current | grep starting
+echo "starting Docker"
 exec 2>&1
 exec dockerd --host=unix:///var/run/docker.sock
 # --log-level=error
+
+
+
+# this will result in docker logs visible plan in the stdout
+# echo "starting Docker"
+# dockerd --host=unix:///var/run/docker.sock

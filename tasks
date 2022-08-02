@@ -46,7 +46,7 @@ function docker_login {
 
 function check_flavor {
   if [ -z "$1" ]; then
-    echo "Must specify flavor: alpine-dind or ubuntu18-dind"
+    echo "Must specify flavor: alpine or ubuntu"
     exit 2
   fi
 }

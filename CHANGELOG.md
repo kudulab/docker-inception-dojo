@@ -1,4 +1,7 @@
 * pytest 7.1.2
+* bump base docker image for alpine: docker:20.10.17-dind-alpine3.16
+* bump base docker image for ubuntu: ubuntu:20.04
+* s6 overlay 3.1.1.2
 
 ### 0.3.0 (2022-Feb-28)
 
