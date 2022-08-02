@@ -13,7 +13,7 @@ RUN apk add --no-cache python3 py3-pip &&\
   pip3 install docker-compose==${DOCKER_COMPOSE_VERSION}
 
 RUN python3 -m pip install --upgrade pip &&\
-  pip3 install virtualenv pytest==6.1.1
+  pip3 install virtualenv pytest==7.1.2
 
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz /tmp/
 RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /

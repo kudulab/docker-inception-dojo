@@ -12,7 +12,7 @@ RUN apt-get update && \
   echo 'dojo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 RUN python3 -m pip install --upgrade pip &&\
-  pip3 install pytest==6.1.1
+  pip3 install pytest==7.1.2
 
 # Install Docker
 # To support docker in docker on any driver - clean up now and
