@@ -10,9 +10,9 @@ Built both from alpine and ubuntu18.
 2. Provide a Dojofile:
 ```
 $ cat Dojofile
-DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu18-dind-0.3.0"
+DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu-0.4.0"
 # or if you prefer the alpine version
-# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-dind-0.3.0"
+# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-0.4.0"
 DOJO_DOCKER_OPTIONS="--privileged"
 ```
 3. Run`dojo` in the same directory as Dojofile. It will:
@@ -26,16 +26,18 @@ docker ps -a
 docker-compose --version
 ```
 
+
 ## Contributing
 Instructions how to update this project.
 
-1. Create a new feature branch from the main branch: master
-1. Work on your changes in that feature branch. If you want, describe you changes in [CHANGELOG.md](CHANGELOG.md)
-1. Build your image locally to check that it succeeds: `./tasks build_local`
-1. Test your image: `./tasks itest`
+1. Create a new feature branch from the main branch
+1. Work on your changes in that feature branch. If you want, describe you changes in [CHANGELOG.md](CHANGELOG.md).
+1. Build your image locally to check that it succeeds: `./tasks build ubuntu` and `./tasks build alpine`
+1. Test your image locally: `./tasks itest ubuntu` and `./tasks itest alpine`. You may need to install the test framework - you can run [these commands](https://github.com/kudulab/docker-dotnet-dojo/blob/3.2.0/image/Dockerfile.debian#L58) to do it.
+1. You may also test your image by running it interactively with dojo. Please run `./tasks example ubuntu` or `./tasks example alpine`.
 1. If you are happy with the results, create a PR from your feature branch to master branch
-1. Someone will read your PR, merge it and ensure version bump (using `./tasks set_version`)
-1. CI pipeline will run to automatically build and test docker image, release the project and publish the docker image.
+
+After this, someone will read your PR, merge it and ensure version bump (using `./tasks set_version`). CI pipeline will run to automatically build and test docker image, release the project and publish the docker image.
 
 ## License
 

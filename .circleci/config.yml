@@ -37,7 +37,9 @@ jobs:
       - run:
           command: /bin/bash -c "./tasks verify_version"
       - run:
-          command: /bin/bash -c "./tasks build alpine-dind"
+          command: /bin/bash -c "./tasks build alpine"
+      - run:
+          command: /bin/bash -c "./tasks push alpine"
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -49,7 +51,9 @@ jobs:
       - run:
           command: /bin/bash -c "./tasks verify_version"
       - run:
-          command: /bin/bash -c "./tasks build ubuntu18-dind"
+          command: /bin/bash -c "./tasks build ubuntu"
+      - run:
+          command: /bin/bash -c "./tasks push ubuntu"
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -75,7 +79,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          command: /bin/bash -c "./tasks itest alpine-dind"
+          command: /bin/bash -c "./tasks itest alpine"
 
   itest_ubuntu:
     executor: platform
@@ -97,7 +101,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          command: /bin/bash -c "./tasks itest ubuntu18-dind"
+          command: /bin/bash -c "./tasks itest ubuntu"
 
   release:
     executor: platform
@@ -113,7 +117,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          command: /bin/bash -c "./tasks publish alpine-dind"
+          command: /bin/bash -c "./tasks publish alpine"
 
   publish_ubuntu:
     executor: platform
@@ -122,7 +126,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          command: /bin/bash -c "./tasks publish ubuntu18-dind"
+          command: /bin/bash -c "./tasks publish ubuntu"
 
 commands:
   setup:
