@@ -1,3 +1,5 @@
+### 0.4.0 (2022-Aug-02)
+
 * pytest 7.1.2
 * bump base docker image for alpine: docker:20.10.17-dind-alpine3.16
 * bump base docker image for ubuntu: ubuntu:20.04
