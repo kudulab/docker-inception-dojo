@@ -2,7 +2,7 @@
 
 A [Dojo](https://github.com/kudulab/dojo) Docker image to execute Dojo tests.
 
-Built both from alpine and ubuntu18.
+Built both from alpine and ubuntu.
 
 ## Usage
 
