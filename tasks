@@ -116,7 +116,6 @@ case "${command}" in
       ;;
   release)
       ./tasks verify_version
-      setup_github_credentials
       releaser::git_tag_from_changelog
       ;;
   publish)
