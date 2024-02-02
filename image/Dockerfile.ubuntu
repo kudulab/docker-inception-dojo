@@ -1,4 +1,9 @@
-FROM ubuntu:20.04
+FROM ubuntu:23.10
+
+# the Dojo scripts create a user with ID==1000,
+# previous ubuntu images seem to not have the ubuntu user,
+# so let's delete it to avoid conflicts
+RUN userdel --remove ubuntu
 
 ENV DOJO_VERSION=0.11.0
 RUN apt-get update && \
@@ -11,28 +16,36 @@ RUN apt-get update && \
   rm -r /tmp/dojo_git && \
   echo 'dojo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN python3 -m pip install --upgrade pip &&\
-  pip3 install pytest==7.1.2
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
+  python3-virtualenv python3-pytest=7.4.0-2
 
 # Install Docker
 # To support docker in docker on any driver - clean up now and
 # declare volume to bypass any storage drivers
-RUN /bin/bash -c "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -" &&\
-  echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" > /etc/apt/sources.list.d/docker.list &&\
-  apt-get update &&\
+RUN install -m 0755 -d /etc/apt/keyrings &&\
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc &&\
+  chmod a+r /etc/apt/keyrings/docker.asc &&\
+  # Add the repository to Apt sources:
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
-  docker-ce &&\
+  docker-ce docker-ce-cli  &&\
   rm -Rf /var/lib/docker/* &&\
   rm -rf /var/lib/apt/lists/* && rm -rf /tmp/* /var/tmp/*
 VOLUME /var/lib/docker
 
 RUN usermod -aG docker dojo
 
-ENV DOCKER_COMPOSE_VERSION="1.23.2"
-RUN wget --tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force \
-  -O /usr/local/bin/docker-compose \
-  https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` &&\
-  chmod +x /usr/local/bin/docker-compose
+ENV DOCKER_COMPOSE_VERSION="2.24.5-1~ubuntu.23.10~mantic"
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
+  docker-compose-plugin=${DOCKER_COMPOSE_VERSION}
+COPY docker-compose /usr/bin/docker-compose
+RUN chmod +x /usr/bin/docker-compose
 
 # Install S6 overlay
 ENV S6_OVERLAY_VERSION="3.1.1.2"

@@ -41,7 +41,7 @@ After this, someone will read your PR, merge it and ensure version bump (using `
 
 ## License
 
-Copyright 2019-2022 Ava Czechowska, Tom Setkowski
+Copyright 2019-2024 Ava Czechowska, Tom Setkowski
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

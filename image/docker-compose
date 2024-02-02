@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# workaround, so that we still can use 'docker-compose' command
+# even if now it's known as 'docker compose'
+docker compose $@
