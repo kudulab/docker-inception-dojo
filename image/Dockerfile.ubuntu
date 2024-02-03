@@ -40,12 +40,11 @@ VOLUME /var/lib/docker
 
 RUN usermod -aG docker dojo
 
-ENV DOCKER_COMPOSE_VERSION="2.24.5-1~ubuntu.23.10~mantic"
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
-  docker-compose-plugin=${DOCKER_COMPOSE_VERSION}
-COPY docker-compose /usr/bin/docker-compose
-RUN chmod +x /usr/bin/docker-compose
+ENV DOCKER_COMPOSE_VERSION="2.24.5"
+RUN wget --tries=3 --retry-connrefused --wait=3 --random-wait --quiet --show-progress --progress=bar:force \
+  -O /usr/local/bin/docker-compose \
+  https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` &&\
+  chmod +x /usr/local/bin/docker-compose
 
 # Install S6 overlay
 ENV S6_OVERLAY_VERSION="3.1.1.2"
