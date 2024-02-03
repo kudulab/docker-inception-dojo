@@ -45,3 +45,23 @@ def test_docker_logs_are_not_printed_to_console():
     # log file exists and is not empty
     result = run_command('tail', ['/var/log/docker/current'])
     assert 'info' in result.stdout
+
+# https://github.com/kudulab/dojo/issues/38
+def test_docker_compose_run_and_output_from_container_is_visible1():
+    result = run_command('docker-compose', ['-f', './dc.yaml', '-p',  'testdojorunid', 'run', '--rm', 'default', 'sh', '-c', 'printenv', 'HOME'])
+    print('stdout')
+    print(result.stdout)
+    print('stderr')
+    print(result.stderr)
+    assert '/root' in result.stdout
+    assert result.returncode == 0
+
+# https://github.com/kudulab/dojo/issues/38
+def test_docker_compose_run_and_output_from_container_is_visible2():
+    result = run_command('docker-compose', '-f ./dc.yaml -p testdojorunid run --rm default sh -c "whoami"'.split(' '))
+    print('stdout')
+    print(result.stdout)
+    print('stderr')
+    print(result.stderr)
+    assert 'root' in result.stdout
+    assert result.returncode == 0

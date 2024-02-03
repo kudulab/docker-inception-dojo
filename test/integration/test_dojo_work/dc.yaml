@@ -1,0 +1,15 @@
+version: '2.2'
+services:
+  default:
+    init: true
+    links:
+    - abc:abc
+    image: alpine:3.19
+  abc:
+    init: true
+    image: alpine:3.19
+    entrypoint: ["/bin/sh", "-c"]
+    # short-running command
+    # command: ["true"]
+    # long running command
+    command: ["while true; do sleep 1d; done;"]
