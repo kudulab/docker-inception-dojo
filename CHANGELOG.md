@@ -1,3 +1,14 @@
+### 0.6.0 (2024-Feb-03)
+
+* back to the old way of installing docker and docker-compose,
+because the new way resulted in https://github.com/kudulab/dojo/issues/38
+and there was missing output of some commands (such as `echo`) from
+ the containers
+ * docker-compose 2.23.3 on alpine and 2.24.5-1 on ubuntu
+ * pytest 7.4.3 on alpine and 7.4.0-2 on ubuntu
+ * bump base docker image for alpine: docker:25.0.2-dind-alpine3.19
+ * bump base docker image for ubuntu: ubuntu:23.10
+
 ### 0.5.0 (2024-Feb-03)
 
 * docker-compose 2.23.3 on alpine and 2.24.5-1 on ubuntu
