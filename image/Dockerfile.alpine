@@ -15,6 +15,11 @@ RUN usermod -aG docker dojo
 
 RUN apk add --no-cache py3-virtualenv py3-pytest==7.4.3-r0
 
+# let's have a mightier ps command available here, so that there is more parity between
+# the alpine and the ubuntu docker-inception-dojo images
+# https://stackoverflow.com/a/48659453/4457564
+RUN apk add --no-cache procps
+
 # Install S6-overlay
 RUN apk add --no-cache xz
 ENV S6_OVERLAY_VERSION="3.1.1.2"

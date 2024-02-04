@@ -1,3 +1,7 @@
+### 0.6.1 (2024-Feb-04)
+
+* install procps on Alpine
+
 ### 0.6.0 (2024-Feb-03)
 
 * back to the old way of installing docker and docker-compose,
