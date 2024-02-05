@@ -1,3 +1,8 @@
+### 0.6.2 (2024-Feb-06)
+
+* use Dojo image scripts 0.13.0
+* limit output from this image init scripts
+
 ### 0.6.1 (2024-Feb-04)
 
 * install procps on Alpine

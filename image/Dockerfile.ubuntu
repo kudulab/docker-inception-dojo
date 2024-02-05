@@ -5,7 +5,7 @@ FROM ubuntu:23.10
 # so let's delete it to avoid conflicts
 RUN userdel --remove ubuntu
 
-ENV DOJO_VERSION=0.11.0
+ENV DOJO_VERSION=0.13.0
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
   python3 python3-pip python3-virtualenv python3-venv \
