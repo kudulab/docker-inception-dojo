@@ -10,9 +10,9 @@ Built both from alpine and ubuntu.
 2. Provide a Dojofile:
 ```
 $ cat Dojofile
-DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu-0.4.0"
+DOJO_DOCKER_IMAGE="kudulab/inception-dojo:ubuntu-0.7.0"
 # or if you prefer the alpine version
-# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-0.4.0"
+# DOJO_DOCKER_IMAGE="kudulab/inception-dojo:alpine-0.7.0"
 DOJO_DOCKER_OPTIONS="--privileged"
 ```
 3. Run`dojo` in the same directory as Dojofile. It will:
@@ -41,7 +41,7 @@ After this, someone will read your PR, merge it and ensure version bump (using `
 
 ## License
 
-Copyright 2019-2024 Ava Czechowska, Tom Setkowski
+Copyright 2019-2025 Ava Czechowska, Tom Setkowski
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

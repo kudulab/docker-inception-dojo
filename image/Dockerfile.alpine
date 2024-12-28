@@ -1,6 +1,6 @@
-FROM docker:25.0.2-dind-alpine3.19
+FROM docker:27.4.1-dind-alpine3.21
 
-ENV DOJO_VERSION=0.13.0
+ENV DOJO_VERSION=0.13.2
 RUN apk add --no-cache bash shadow sudo git ncurses && \
   git clone --depth 1 -b ${DOJO_VERSION} https://github.com/kudulab/dojo.git /tmp/dojo_git &&\
   /tmp/dojo_git/image_scripts/src/install.sh && \
@@ -8,12 +8,12 @@ RUN apk add --no-cache bash shadow sudo git ncurses && \
   rm -r /tmp/dojo_git && \
   echo 'dojo ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-ENV DOCKER_COMPOSE_VERSION="2.23.3-r0"
+ENV DOCKER_COMPOSE_VERSION="2.31.0-r0"
 RUN apk add --no-cache python3 py3-pip docker-cli-compose==${DOCKER_COMPOSE_VERSION}
 VOLUME /var/lib/docker
 RUN usermod -aG docker dojo
 
-RUN apk add --no-cache py3-virtualenv py3-pytest==7.4.3-r0
+RUN apk add --no-cache py3-virtualenv py3-pytest==8.3.4-r0
 
 # let's have a mightier ps command available here, so that there is more parity between
 # the alpine and the ubuntu docker-inception-dojo images
