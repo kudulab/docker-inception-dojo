@@ -1,3 +1,9 @@
+### 0.7.0 (2024-Dec-29)
+
+* docker-compose version 2.32 (ubuntu) and 2.31.0-r0 (alpine)
+* base image for alpine docker:27.4.1-dind-alpine3.21
+* base image for ubuntu ubuntu:24.10
+
 ### 0.6.2 (2024-Feb-06)
 
 * use Dojo image scripts 0.13.0
